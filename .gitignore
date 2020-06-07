@@ -1,3 +1,8 @@
+# IDE
+.idea/
+.theia/
+.vscode/
+
 # Binaries for programs and plugins
 *.exe
 *.exe~

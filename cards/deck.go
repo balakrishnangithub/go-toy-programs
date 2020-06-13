@@ -77,9 +77,9 @@ func newDeckFromFile(filename string) deck {
 // shuffle shuffles the elements in deck
 func (d deck) shuffle() {
 	rand.Seed(time.Now().Unix())
-	maxIndex := len(d)
+	deckLength := len(d)
 	for index := range d {
-		randIndex := rand.Intn(maxIndex)
+		randIndex := rand.Intn(deckLength) // (0,deckLength] greater than or equal to 0 and less than deckLength
 		d[index], d[randIndex] = d[randIndex], d[index]
 	}
 }

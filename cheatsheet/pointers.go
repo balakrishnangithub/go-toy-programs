@@ -24,7 +24,7 @@ func getArrayAddr(a [7]int) string {
 	return fmt.Sprintf("%p", &a)
 }
 
-func main() {
+func mainPointers() {
 	var x, y int
 	fmt.Println(x == 0, x == y)  // "true true"
 	fmt.Println(&x == &y)        // "false"

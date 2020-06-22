@@ -30,6 +30,8 @@ func mainIPGeolocationAPI() {
 	if err != nil {
 		panic(err)
 	}
+	// https://stackoverflow.com/questions/33238518/what-could-happen-if-i-dont-close-response-body
+	defer resp.Body.Close()
 
 	var decoder *json.Decoder = json.NewDecoder(resp.Body)
 

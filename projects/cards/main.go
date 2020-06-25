@@ -1,8 +1,13 @@
 package main
 
+import "log"
+
 func main() {
 	newDeck().saveToFile("deckofcards")
-	cards := newDeckFromFile("deckofcards")
+	cards, err := newDeckFromFile("deckofcards")
+	if err != nil {
+		log.Fatal(err)
+	}
 	cards.shuffle()
 	cards.print()
 }

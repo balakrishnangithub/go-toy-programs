@@ -61,7 +61,10 @@ func TestSaveToFileAndNewDeckFromFile(t *testing.T) {
 	d := newDeck()
 	d.saveToFile(filename)
 
-	loadedDeck := newDeckFromFile(filename)
+	loadedDeck, err := newDeckFromFile(filename)
+	if err != nil {
+		t.Errorf("Error: %s", err)
+	}
 	if !decksEqual(d, loadedDeck) {
 		t.Errorf("Expected decks to be equal for saving and loading with same file name.")
 	}

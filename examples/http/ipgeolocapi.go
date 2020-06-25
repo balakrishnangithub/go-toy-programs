@@ -24,11 +24,11 @@ type IPGeolocationAPI struct {
 	Query       string  `json:"query"`
 }
 
-func mainIPGeolocationAPI() {
+func mainIPGeolocationAPI() error {
 	var err error
 	resp, err := http.Get("http://ip-api.com/json")
 	if err != nil {
-		panic(err)
+		return err
 	}
 	// https://stackoverflow.com/questions/33238518/what-could-happen-if-i-dont-close-response-body
 	defer resp.Body.Close()
@@ -41,8 +41,10 @@ func mainIPGeolocationAPI() {
 	var ipGeoLocAPI *IPGeolocationAPI = new(IPGeolocationAPI)
 	err = decoder.Decode(ipGeoLocAPI)
 	if err != nil {
-		panic(err)
+		return err
 	}
 
 	fmt.Printf("%+v\n", ipGeoLocAPI)
+
+	return err
 }

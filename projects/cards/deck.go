@@ -65,13 +65,13 @@ func (d deck) saveToFile(filename string) error {
 
 // newDeckFromFile splits comma separated string from file.
 // It returns []string as deck.
-func newDeckFromFile(filename string) deck {
+func newDeckFromFile(filename string) (deck, error) {
 	bytes, err := ioutil.ReadFile(filename)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 	s := strings.Split(string(bytes), ",")
-	return s
+	return s, err
 }
 
 // shuffle shuffles the elements in deck

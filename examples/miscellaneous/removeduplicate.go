@@ -2,24 +2,25 @@ package main
 
 import (
 	"bufio"
+	"errors"
 	"os"
 )
 
 // rmDupeGenFile reads and generates a file without duplicate lines.
-func rmDupeGenFile(srcPath string, destPath string) {
+func rmDupeGenFile(srcPath string, destPath string) error {
 	if srcPath == destPath {
-		panic("srcPath is equal to destPath which is not accepted")
+		return errors.New("srcPath is equal to destPath which is not accepted")
 	}
 
 	srcFile, err := os.Open(srcPath)
 	if err != nil {
-		panic(err)
+		return err
 	}
 	defer srcFile.Close()
 
 	destFile, err := os.OpenFile(destPath, os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0644)
 	if err != nil {
-		panic(err)
+		return err
 	}
 	defer destFile.Close()
 
@@ -35,13 +36,14 @@ func rmDupeGenFile(srcPath string, destPath string) {
 		} else {
 			_, err := writer.WriteString(line + "\n")
 			if err != nil {
-				panic(err)
+				return err
 			}
 			dupeCount[line] = 0
 		}
 	}
 
 	if err := writer.Flush(); err != nil {
-		panic(err)
+		return err
 	}
+	return err
 }

@@ -11,6 +11,7 @@ import (
 type deck []string
 
 // decksEqual compares two decks, returns true if equal else false.
+// reflect.DeepEqual(d1, d2) is equal to decksEqual(d1, d2)
 func decksEqual(d1, d2 deck) bool {
 	if (d1 == nil) != (d2 == nil) {
 		return false

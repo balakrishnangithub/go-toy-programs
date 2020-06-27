@@ -2,8 +2,44 @@ package main
 
 import (
 	"os"
+	"reflect"
 	"testing"
 )
+
+// Test_decksEqual is bootstrapped by https://github.com/cweill/gotests
+func Test_decksEqual(t *testing.T) {
+	d := newDeck()
+	deckClone := make(deck, len(d))
+	copy(deckClone, d)
+
+	deckCloneMutated := make(deck, len(d))
+	copy(deckCloneMutated, d)
+	deckCloneMutated[0] = ""
+
+	type args struct {
+		d1 deck
+		d2 deck
+	}
+
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{name: "d1=nil, d2=nil", args: args{d1: nil, d2: nil}, want: reflect.DeepEqual(nil, nil)},
+		{name: "d1=newDeck(), d2=nil", args: args{d1: d, d2: nil}, want: reflect.DeepEqual(d, nil)},
+		{name: "d1=newDeck(), d2=newDeck()[len(d)/2:]", args: args{d1: d, d2: d[len(d)/2:]}, want: reflect.DeepEqual(d, d[len(d)/2:])},
+		{name: "d1=newDeck(), d2=newDeck()", args: args{d1: d, d2: deckClone}, want: reflect.DeepEqual(d, deckClone)},
+		{name: "d1=newDeck(), d2=newDeck() mutated", args: args{d1: d, d2: deckCloneMutated}, want: reflect.DeepEqual(d, deckCloneMutated)},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := decksEqual(tt.args.d1, tt.args.d2); got != tt.want {
+				t.Errorf("decksEqual() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
 
 func TestDecksEqual(t *testing.T) {
 	if !decksEqual(nil, nil) {

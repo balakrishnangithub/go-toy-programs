@@ -12,4 +12,5 @@ func main() {
 	}
 
 	rmDupeGenFile(usr.HomeDir+"/.bash_history", ".bash_history__unique")
+	printArgsFile()
 }

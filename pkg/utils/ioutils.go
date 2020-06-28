@@ -1,4 +1,4 @@
-package main
+package utils
 
 import (
 	"bytes"
@@ -6,10 +6,10 @@ import (
 	"os"
 )
 
-// coutAll reads from r and writes the value to stdout.
+// CoutAll reads from r and writes the value to stdout.
 // It returns the number of bytes written and an error, if any.
 // Note: `ioutil.ReadAll` reads from r and returns the value.
-func coutAll(r io.Reader) (coutCount int, err error) {
+func CoutAll(r io.Reader) (coutCount int, err error) {
 	buf := make([]byte, bytes.MinRead) // bytes.MinRead is 512
 	for {
 		n, err := r.Read(buf)

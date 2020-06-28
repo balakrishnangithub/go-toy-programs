@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 	"net/http"
+
+	myutils "github.com/bkmagnetron/go-toy-programs/pkg/utils"
 )
 
 func main() {
@@ -13,5 +15,5 @@ func main() {
 		log.Fatal(err)
 	}
 	defer resp.Body.Close()
-	coutAll(resp.Body)
+	myutils.CoutAll(resp.Body)
 }

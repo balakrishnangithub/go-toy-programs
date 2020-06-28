@@ -7,6 +7,8 @@ import (
 )
 
 // IPGeolocationAPI generated with the help of https://mholt.github.io/json-to-go/
+// Note: struct field with JSON tag has to be exported
+// Reference: https://golang.org/pkg/encoding/json/#Marshal
 type IPGeolocationAPI struct {
 	Status      string  `json:"status"`
 	Country     string  `json:"country"`

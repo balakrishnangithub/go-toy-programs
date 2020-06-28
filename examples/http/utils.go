@@ -7,19 +7,28 @@ import (
 )
 
 // coutAll reads from r and writes the value to stdout.
-// Note: ioutil.ReadAll reads from r and returns the value.
-func coutAll(r io.Reader) error {
+// It returns the number of bytes written and an error, if any.
+// Note: `ioutil.ReadAll` reads from r and returns the value.
+func coutAll(r io.Reader) (coutCount int, err error) {
 	buf := make([]byte, bytes.MinRead) // bytes.MinRead is 512
 	for {
 		n, err := r.Read(buf)
 		if err == io.EOF {
-			os.Stdout.Write(buf[:n])
+			wc, err := os.Stdout.Write(buf[:n])
+			if err != nil {
+				return coutCount, err
+			}
+			coutCount += wc
 			break
 		}
 		if err != nil {
-			return err
+			return coutCount, err
 		}
-		os.Stdout.Write(buf)
+		wc, err := os.Stdout.Write(buf)
+		if err != nil {
+			return coutCount, err
+		}
+		coutCount += wc
 	}
 	/*
 		Alternatively we can use `bytes.Buffer`
@@ -32,5 +41,5 @@ func coutAll(r io.Reader) error {
 		}
 		os.Stdout.Write(buf.Bytes())
 	*/
-	return nil
+	return coutCount, err
 }

@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	mainIPGeolocationAPI()
+	ipGeolocationAPI()
 
 	resp, err := http.Get("https://example.com")
 	if err != nil {

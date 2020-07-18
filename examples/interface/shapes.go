@@ -27,7 +27,7 @@ func (t *triangle) getArea() float64 {
 	return 0.5 * t.base * t.height
 }
 
-func mainShapes() {
+func shapesCalculator() {
 	shape1 := square{side: 10}
 	shape2 := triangle{base: 10, height: 10}
 	printArea(shape1)

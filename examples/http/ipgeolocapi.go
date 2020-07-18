@@ -26,7 +26,7 @@ type IPGeolocationAPI struct {
 	Query       string  `json:"query"`
 }
 
-func mainIPGeolocationAPI() error {
+func ipGeolocationAPI() error {
 	var err error
 	resp, err := http.Get("http://ip-api.com/json")
 	if err != nil {

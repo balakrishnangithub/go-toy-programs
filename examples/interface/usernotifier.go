@@ -36,7 +36,7 @@ func (notifier SmsNotifier) SendMessage(user *User, message string) error {
 	return err
 }
 
-func mainUserNotifier() {
+func userNotifier() {
 	user := User{"Gavin Belson", "gavin.belson@hooli.com", []UserNotifier{EmailNotifier{}, SmsNotifier{}}}
 
 	user.notify("Welcome!")

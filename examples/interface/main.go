@@ -1,7 +1,7 @@
 package main
 
 func main() {
-	mainSalary()
-	mainUserNotifier()
-	mainShapes()
+	salaryCalculator()
+	shapesCalculator()
+	userNotifier()
 }

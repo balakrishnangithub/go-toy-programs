@@ -54,7 +54,7 @@ func totalExpense(s []SalaryCalculator) {
 	fmt.Printf("Total Expense Per Month ₹%d\n", expense)
 }
 
-func mainSalary() {
+func salaryCalculator() {
 	pemp1 := Permanent{
 		empID:    1,
 		basicpay: 5000,

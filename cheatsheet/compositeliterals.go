@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 
-func mainCompositeLiterals() {
+func compositeLiterals() {
 	type Point3D struct{ x, y, z float64 }
 	type Line struct{ p, q Point3D }
 	origin := Point3D{}

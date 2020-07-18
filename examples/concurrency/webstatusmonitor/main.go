@@ -20,7 +20,7 @@ func checkLink(link string, c chan WebStatus) {
 	c <- WebStatus{link: link, isDown: false}
 }
 
-func mainWebStatusMonitor() {
+func main() {
 	links := []string{
 		"https://golang.com",
 		"https://tour.golang.org/",

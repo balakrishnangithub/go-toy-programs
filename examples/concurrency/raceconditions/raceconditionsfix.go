@@ -48,3 +48,27 @@ func raceCondition2Fix2() {
 	wg.Wait()
 	fmt.Println()
 }
+
+func raceCondition3Fix() {
+	cntr := 0
+	mux := sync.Mutex{}
+	wg := sync.WaitGroup{}
+	for i := 0; i < 100; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			mux.Lock()
+			cntr++ // Lock so only one goroutine at a time can access cntr.
+			mux.Unlock()
+		}()
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			mux.Lock()
+			cntr-- // Lock so only one goroutine at a time can access cntr.
+			mux.Unlock()
+		}()
+	}
+	wg.Wait()
+	fmt.Println(cntr) // without WaitGroup this also fall under race condition.
+}

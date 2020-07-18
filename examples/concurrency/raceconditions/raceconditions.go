@@ -25,12 +25,25 @@ func raceCondition1() {
 func raceCondition2() {
 	var wg sync.WaitGroup
 	wg.Add(5)
-	for i := 0; i < 5; i++ {
+	for i := 0; i < 5; i++ { // conflicting access
 		go func() {
-			fmt.Print(i) // Output: <unspecified> but mostly 5555
+			fmt.Print(i) // conflicting access
 			wg.Done()
 		}()
 	}
 	wg.Wait()
 	fmt.Println()
+}
+
+func raceCondition3() {
+	cntr := 0
+	for i := 0; i < 100; i++ {
+		go func() {
+			cntr++ // conflicting access
+		}()
+		go func() {
+			cntr-- // conflicting access
+		}()
+	}
+	fmt.Println(cntr) // conflicting access
 }

@@ -8,8 +8,6 @@ import (
 	"net/http"
 	"os"
 	"path"
-
-	"github.com/dustin/go-humanize"
 )
 
 // WriteCounter counts the number of bytes written to it.
@@ -23,7 +21,7 @@ type WriteCounter struct {
 func (wc *WriteCounter) Write(p []byte) (int, error) {
 	n := len(p)
 	wc.Total += uint64(n)
-	fmt.Printf("\r%v bytes", humanize.Bytes(wc.Total))
+	fmt.Printf("\r%v bytes", wc.Total)
 	return n, nil
 }
 
@@ -41,7 +39,7 @@ func DownloadFile(url string) (err error) {
 	}
 	defer resp.Body.Close()
 
-	fileName := path.Base(req.URL.Path)
+	fileName := path.Base(resp.Request.URL.Path)
 	f, err := os.Create(fileName)
 	if err != nil {
 		return err
